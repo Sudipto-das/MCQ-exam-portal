@@ -7,10 +7,11 @@ const authentication = (req,res,next) =>{
     
     if(authHeader){
         const token = authHeader.split(' ')[1]
+        console.log('Received Token:', token);
         if(token){
             jwt.verify(token,SECRETKey,(err,user) =>{
                 if(err){
-                    console.log(err)
+                    
                     return res.sendStatus(403)
                 }
                 req.user = user

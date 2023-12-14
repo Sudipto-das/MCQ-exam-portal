@@ -21,28 +21,30 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-         const response=fetch('http://localhost:8000/auth/signup',{
-            method:'POST',
-            body: JSON.stringify({
-                username: formData.username,
-                password: formData.password,
-              }),
-              headers:{
-                "Content-type": "application/json",
-              }
-        })
-        if(response.ok){
-            const data = await response.json()
-            localStorage.setItem("token",data.token)
-            console.log ("signedup sucsessfully")
-        }
-
-    }catch(err){
-
-    }
+    try {
+      const response = await fetch('http://localhost:8000/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          username: formData.username,
+          password: formData.password,
+        }),
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
   
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
+        console.log('Logged in successfully');
+      } else {
+        console.error('Failed to log in');
+      }
+    } catch (err) {
+      console.error('Error during login:', err);
+    }
   };
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -50,7 +52,7 @@ const SignUp = () => {
         <CssBaseline />
         <Paper elevation={3} style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Typography variant="h5" color="primary">
-            Sign Up
+            Sign In
           </Typography>
           <form onSubmit={handleSubmit} style={{ width: '100%', marginTop: '20px' }}>
             
@@ -77,12 +79,12 @@ const SignUp = () => {
               onChange={handleChange}
             />
             <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: '20px' }}>
-              Sign Up
+              Sign In
             </Button>
           </form>
-          <span >Already Register?</span>
-          <Link to="/signin" style={{ color: "#43BD78" }}>
-          SignIn
+          <span >New User?</span>
+          <Link to="/" style={{ color: "#43BD78" }}>
+          Signup
         </Link>
         </Paper>
       </Container>

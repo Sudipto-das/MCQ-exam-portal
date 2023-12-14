@@ -3,7 +3,7 @@ const { Exam } = require('../database');
 const router = express.Router();
 const {authentication} = require('../middleware/')
 
-router.post('/create-exam', authentication,async (req, res) => {
+router.post('/create-exam',authentication,async (req, res) => {
     try {
         const { title, numQuestions, timeLimit,  questions } = req.body;
         const pointValue =1
