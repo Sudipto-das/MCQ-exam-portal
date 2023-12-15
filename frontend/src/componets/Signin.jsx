@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import config from '../config';
 const theme = createTheme();
 
-const SignUp = () => {
+const SignUp = ({onLogin}) => {
     const backendUrl = config.backendUrl
     const [formData, setFormData] = useState({
         username: '',
@@ -20,7 +20,9 @@ const SignUp = () => {
             [e.target.name]: e.target.value,
         });
     };
-
+    const handleLogin =() =>{
+        onLogin()
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -39,6 +41,7 @@ const SignUp = () => {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
                 console.log('Logged in successfully');
+                
                 navigate('/dashboard')
             } else {
                 console.error('Failed to log in');
@@ -81,7 +84,7 @@ const SignUp = () => {
                             value={formData.password}
                             onChange={handleChange}
                         />
-                        <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: '20px' }}>
+                        <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: '20px' }} onClick={handleLogin}>
                             Sign In
                         </Button>
                     </form>

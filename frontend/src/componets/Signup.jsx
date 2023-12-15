@@ -8,13 +8,17 @@ import config from '../config';
 const theme = createTheme();
 
 
-const SignUp = () => {
+const SignUp = ({onLogin}) => {
     const backendUrl = config.backendUrl
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
   const navigate = useNavigate()
+
+  const handleLogin = () =>{
+    onLogin()
+  }
 
   const handleChange = (e) => {
     setFormData({
@@ -82,7 +86,7 @@ const SignUp = () => {
               value={formData.password}
               onChange={handleChange}
             />
-            <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: '20px' }}>
+            <Button type="submit" fullWidth variant="contained" color="primary" style={{ marginTop: '20px' }} onClick={handleLogin}>
               Sign Up
             </Button>
           </form>

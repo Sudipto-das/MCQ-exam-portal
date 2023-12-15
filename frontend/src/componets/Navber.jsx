@@ -14,7 +14,7 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 const drawerWidth = 240;
 
-const SideNavbar = () => {
+const SideNavbar = ({onLogout}) => {
     const linkStyle = {
         textDecoration: 'none',
         color: 'inherit',
@@ -25,6 +25,9 @@ const SideNavbar = () => {
         bottom: '16px',
         left: '16px',
       };
+      const handleLogout = ()=>{
+        onLogout()
+      }
 
   return (
     <Drawer
@@ -60,7 +63,7 @@ const SideNavbar = () => {
         </ListItem>
       </List>
       <Divider />
-      <Button color="secondary" style={logoutStyle} component={Link} to="/signin" onClick={()=>{localStorage.setItem('token',JSON.stringify(null))}}>
+      <Button color="secondary" style={logoutStyle} component={Link} to="/signin" onClick={handleLogout}>
         Logout
       </Button>
     </Drawer>
