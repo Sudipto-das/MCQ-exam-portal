@@ -3,10 +3,13 @@
 import { useState } from 'react';
 import { TextField, Button, Paper, Typography, Container, CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link,useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom"
+import config from '../config';
 const theme = createTheme();
 
+
 const SignUp = () => {
+    const backendUrl = config.backendUrl
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -23,7 +26,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-         const response=fetch('http://localhost:8000/auth/signup',{
+         const response=fetch(`${backendUrl}auth/signup`,{
             method:'POST',
             body: JSON.stringify({
                 username: formData.username,

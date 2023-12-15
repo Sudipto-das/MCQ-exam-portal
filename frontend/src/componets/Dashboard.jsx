@@ -16,9 +16,9 @@ import {
   TextField,
   DialogActions,
 } from '@mui/material';
-
+import config from '../config'
 const ExamList = () => {
-    
+   const backendUrl = config.backendUrl 
   const [exams, setExams] = useState([]);
   const [addQuestionModalOpen, setAddQuestionModalOpen] = useState(false);
   const [newQuestion,setNewQuestion] = useState({
@@ -32,7 +32,7 @@ const ExamList = () => {
 
   const fetchExams = async () => {
     try {
-      const response = await fetch('http://localhost:8000/exam/get-myexam', {
+      const response = await fetch(`${backendUrl}exam/get-myexam`, {
         method: 'GET',
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -91,7 +91,7 @@ const ExamList = () => {
 
   const handleDeleteExam = async (examId) => {
     try {
-      const response = await fetch(`http://localhost:8000/exam/delete-exam/${examId}`, {
+      const response = await fetch(`${backendUrl}exam/delete-exam/${examId}`, {
         method: 'DELETE',
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -120,7 +120,7 @@ const ExamList = () => {
   const handleSaveAddQuestion=async ()=>{
 
     try{
-        const response = fetch(`http://localhost:8000/exam/add-question/${newQuestion.examId}`,{
+        const response = fetch(`${backendUrl}exam/add-question/${newQuestion.examId}`,{
             method:'POST',
             body:JSON.stringify(newQuestion),
             headers: {

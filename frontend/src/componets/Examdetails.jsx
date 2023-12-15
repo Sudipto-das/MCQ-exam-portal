@@ -16,8 +16,9 @@ import {
     TextField,
     DialogActions,
 } from '@mui/material';
-
+import config from '../config'
 const ExamDetails = () => {
+    const backendUrl =config.backendUrl
     const { examId } = useParams();
     const [exam, setExam] = useState(null);
     const [editQuestionModalOpen, setEditQuestionModalOpen] = useState(false);
@@ -33,7 +34,7 @@ const ExamDetails = () => {
 
     const fetchExamDetails = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/exam/get-exam/${examId}`, {
+            const response = await fetch(`${backendUrl}exam/get-exam/${examId}`, {
                 method: 'GET',
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -61,7 +62,7 @@ const ExamDetails = () => {
     };
     const handleSaveEditedQuestion = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/exam/update-question/${examId}/${editedQuestion.id}`, {
+            const response = await fetch(`${backendUrl}exam/update-question/${examId}/${editedQuestion.id}`, {
                 method: 'PUT',
                 body: JSON.stringify(editedQuestion),
                 headers: {
@@ -113,7 +114,7 @@ const ExamDetails = () => {
     };
     const handleDeleteQuestion = async (questionId) => {
         try {
-            const response = await fetch(`http://localhost:8000/exam/delete-question/${examId}/${questionId}`, {
+            const response = await fetch(`${backendUrl}exam/delete-question/${examId}/${questionId}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -121,7 +122,7 @@ const ExamDetails = () => {
             });
 
             if (response.ok) {
-                // Refresh the exam details after deleting the question
+               
                 fetchExamDetails();
             } else {
                 console.error('Failed to delete question');

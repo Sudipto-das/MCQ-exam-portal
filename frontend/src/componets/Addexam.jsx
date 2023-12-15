@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import { TextField, Button, Paper, Typography, Container, CssBaseline, Dialog, DialogTitle, DialogContent, Grid,DialogActions } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import config from '../config';
 const theme = createTheme();
 
 const AddExam = () => {
+    const backendUrl = config.backendUrl
     const [examData, setExamData] = useState({
         title: '',
         numQuestions: '',
@@ -25,8 +26,6 @@ const AddExam = () => {
             [e.target.name]: e.target.value,
         });
     };
-
-
 
     const handleOptionChange = ( optionIndex, e) => {
         setNewQuestion((prevQuestion)=>{
@@ -78,7 +77,7 @@ const AddExam = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8000/exam/create-exam', {
+            const response = await fetch(`${backendUrl}exam/create-exam`, {
                 method: 'POST',
                 body: JSON.stringify(examData),
                 headers: {
