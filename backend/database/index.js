@@ -22,6 +22,10 @@ const examSchema = new mongoose.Schema({
     },
     
     questions: [questionSchema],
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    }
 })
 const User = mongoose.model('User',userSchema)
 const Exam = mongoose.model('Exam', examSchema);

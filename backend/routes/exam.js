@@ -6,6 +6,7 @@ const {authentication} = require('../middleware/')
 router.post('/create-exam',authentication,async (req, res) => {
     try {
         const { title, numQuestions, timeLimit,  questions } = req.body;
+        const userId = req.user.id
         const pointValue =1
         const newExam = new Exam({
             title,
@@ -13,6 +14,7 @@ router.post('/create-exam',authentication,async (req, res) => {
             timeLimit,
             scoringMechanism: JSON.stringify({ type: 'simple', pointValue }),
             questions,
+            user:userId
 
         });
         const savedExam = await newExam.save();
@@ -29,6 +31,16 @@ router.get('/get-exams',authentication,async(req,res)=>{
         res.json(exams)
 
     }catch(err){
+        res.status(500).json({err:err.message})
+    }
+})
+router.get('/get-myexam',authentication,async(req,res)=>{
+    const userId = req.user.id
+    try{
+        const exams = await Exam.find({user:userId})
+        res.json(exams)
+    }catch(err){
+        console.log(err)
         res.status(500).json({err:err.message})
     }
 })

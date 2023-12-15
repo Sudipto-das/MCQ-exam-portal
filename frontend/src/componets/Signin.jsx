@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { TextField, Button, Paper, Typography, Container, CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 const theme = createTheme();
 
 const SignUp = () => {
@@ -11,7 +11,7 @@ const SignUp = () => {
     username: '',
     password: '',
   });
-
+  const navigate = useNavigate()
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -37,6 +37,7 @@ const SignUp = () => {
         const data = await response.json();
         localStorage.setItem('token', data.token);
         console.log('Logged in successfully');
+        navigate('/dashboard')
       } else {
         console.error('Failed to log in');
       }
