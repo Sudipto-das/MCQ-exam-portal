@@ -8,7 +8,7 @@ import ExamList from './componets/Dashboard';
 import ExamDetails from './componets/Examdetails';
 import SideNavbar from './componets/Navber';
 function App() {
-  const [isLoggedin,setIsLoggedin] = useState(true)
+  const [isLoggedin,setIsLoggedin] = useState(false)
   const handleLogin = ()=>{
     setIsLoggedin(true)
   }
