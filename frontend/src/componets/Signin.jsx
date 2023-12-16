@@ -42,7 +42,7 @@ const SignUp = ({onLogin}) => {
                 localStorage.setItem('token', data.token);
                 console.log('Logged in successfully');
                 
-                navigate('/dashboard')
+                navigate('/exam-list')
             } else {
                 console.error('Failed to log in');
             }

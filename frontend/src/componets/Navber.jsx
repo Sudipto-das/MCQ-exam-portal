@@ -43,11 +43,11 @@ const SideNavbar = ({onLogout}) => {
       anchor="left"
     >
       <List>
-        <ListItem button component={Link} to="/dashboard" style={linkStyle}>
+        <ListItem button component={Link} to="/exam-list" style={linkStyle}>
           <ListItemIcon>
             <DashboardIcon/>
           </ListItemIcon>
-          <ListItemText primary="Dashboard" />
+          <ListItemText primary="ExamList" />
         </ListItem>
         <ListItem button component={Link} to="/addExam" style={linkStyle}>
           <ListItemIcon>

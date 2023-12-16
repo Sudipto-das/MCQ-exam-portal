@@ -43,7 +43,7 @@ const SignUp = ({onLogin}) => {
         if(response.ok){
             const data = await response.json()
             localStorage.setItem("token",data.token)
-            navigate('/dashboard')
+            navigate('/exam-list')
             console.log ("signedup sucsessfully")
 
         }
